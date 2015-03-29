@@ -8,6 +8,7 @@
 
   var plus = document.querySelectorAll(".plus");
   var minus = document.querySelectorAll(".minus");
+  var input = document.querySelectorAll(".counter-input");
 
   for(var i = 0; i < plus.length; i++) {
 
@@ -17,8 +18,6 @@
       var count = this.parentNode.querySelector(".counter-input");
 
       var val =  (parseInt(count.value) + 1);
-
-      if (isNaN(val)) val = 0;
 
       count.value =  val;
 
@@ -33,7 +32,7 @@
       var count = this.parentNode.querySelector(".counter-input");
       var val = (parseInt(count.value) - 1);
 
-      if (val < 0 || isNaN(val)) val = 0;
+      if (val < 0 ) val = 0;
 
       count.value =  val;
 
@@ -41,11 +40,22 @@
   };
 
 
+  for(var i = 0; i < plus.length; i++) {
+
+    input[i].addEventListener("blur", function (event) {
+      event.preventDefault();
+
+      if (isNaN(this.value)) this.value = 0;
+
+    })
+
+  };
+
 
   //_____Send-form____
 
 
-  
+
   /*xhr.open("get", "/send?" + qs);*/
 
 
@@ -66,7 +76,7 @@
   var xhr = new XMLHttpRequest();
 
 
-  xhr.open("get", "hello.txt");
+  xhr.open("post", "/send");
 
   xhr.addEventListener("readystatechange", function() {
     if (xhr.readyState == 4) {
@@ -74,7 +84,7 @@
     }
   });
 
-  xhr.send();
+  xhr.send(qs);
 
 
 
@@ -86,7 +96,7 @@
 /*var xhr = new XMLHttpRequest();
 
   xhr.open("get", "hello.txt");
-  
+
   xhr.addEventListener("readystatechange", function() {
     if (xhr.readyState == 4) {
     console.log(xhr.responseText);
