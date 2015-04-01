@@ -52,6 +52,80 @@
   };
 
 
+  if(!("FormData" in window)) {
+    return;
+  }
+
+  var form = document.querySelector(".response");
+
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    var data = new FormData(form);
+
+    request(data, function(response) {
+      console.log(response);
+    });
+  });
+
+  //_____AJAX_____
+
+  function request(data, fn) {
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("post", "/send?" + (new Date()).getTime());
+    xhr.addEventListener("readystatechange", function() {
+      if (xhr.readyState == 4) {
+        fn(xhr.responseText);
+      }
+  });
+
+  xhr.send(data);
+
+  }
+
+
+  //_____Upload-picture_____
+
+
+  var queue = [];
+
+  if(!("FormData" in window)) {
+    form.querySelector(".pictures").addEventListener("change", function() {
+
+      var files = this.files;
+
+      for (var i = 0; i < files.length; i++) {
+        preview(files[i]);
+      }
+
+      this.value = "";
+
+    });
+
+    function preview(file) {
+
+      var area = document.querySelector(".photo-area");
+
+
+      if (file.type.match(/image.*/)) {
+
+        var reader = new FileReader();
+
+        reader.addEventListener("load", function (event) {
+          console.log(event.target.result);
+        });
+
+
+        reader.readAsDataURL(file);
+      }
+    }
+  }
+
+})();
+
+
+
   //_____Send-form____
 
 
@@ -100,37 +174,3 @@
     qs = qs + encodeURIComponent(name) + "=" + encodeURIComponent(value) + "&";
 
   }*/
-
-
-  if(!("FormData" in window)) {
-    return;
-  }
-
-  var form = document.querySelector(".response");
-
-
-  form.addEventListener("submit", function(event) {
-    event.preventDefault();
-    var data = new FormData(form);
-
-    request(data, function(response) {
-      console.log(response);
-    });
-  });
-
-  function request(data, fn) {
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.open("post", "/send?" + (new Date()).getTime());
-    xhr.addEventListener("readystatechange", function() {
-      if (xhr.readyState == 4) {
-        fn(xhr.responseText);
-      }
-  });
-
-  xhr.send(data);
-
-  }
-
-})();
