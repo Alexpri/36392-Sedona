@@ -3,12 +3,12 @@
 
   .container(@col-3);
   @media (min-width: @screen-md) {
-    .inline-block(@pos:middle);
+    .inline-block(@pos: middle);
   }
 
   &__item {
     position: relative;
-    .inline-block(@pos:middle);
+    .inline-block(@pos: middle);
     width: 48px;
     height: 48px;
     margin-right: 6px;
@@ -21,30 +21,29 @@
       background-color: #5496bd;
     }
 
-    &--tw{
-      background:  @bg-color url('../img/min/app/svg/icon-twitter.svg') no-repeat 50% 50%;
+    &--tw {
+      background: @bg-color url('../img/min/app/svg/icon-twitter.svg') no-repeat 50% 50%;
     }
 
     &--fb {
-      background:  @bg-color url('../img/min/app/svg/icon-facebook.svg') no-repeat 50% 50%;
+      background: @bg-color url('../img/min/app/svg/icon-facebook.svg') no-repeat 50% 50%;
     }
 
     &--youtube {
-      background:  @bg-color url('../img/min/app/svg/icon-youtube.svg') no-repeat 50% 50%;
+      background: @bg-color url('../img/min/app/svg/icon-youtube.svg') no-repeat 50% 50%;
     }
   }
 }
 
 .design {
-
   .container(@col-3);
   @media (min-width: @screen-md) {
-    .inline-block(@pos:middle);
+    .inline-block(@pos: middle);
   }
 
   a {
     position: relative;
-    .inline-block(@pos:middle);
+    .inline-block(@pos: middle);
     text-decoration: none;
     color: @text-color--note;
     font-size: 14px;
@@ -53,14 +52,13 @@
 
     &:active {
       color: #000;
-      opacity: 0.4;
+      opacity: .4;
     }
   }
 
   &__by {
-
     .svg-glukhanko {
-      .inline-block(@pos:middle);
+      .inline-block(@pos: middle);
       width: 26px;
       height: 30px;
       margin-left: 5px;
@@ -72,15 +70,14 @@
 
       &:active {
         fill: #000;
-        opacity: 0.4;
+        opacity: .4;
       }
     }
   }
 
   &__for {
-
-    .svg-htmlacademy{
-      .inline-block(@pos:middle);
+    .svg-htmlacademy {
+      .inline-block(@pos: middle);
       width: 26px;
       height: 34px;
       margin-left: 5px;
@@ -92,10 +89,8 @@
 
       &:active {
         fill: #000;
-        opacity: 0.4;
+        opacity: .4;
       }
-
     }
   }
-
 }

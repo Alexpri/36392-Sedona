@@ -19,6 +19,8 @@
 
       var val =  (parseInt(count.value) + 1);
 
+      if (val > 10 ) val = 10;
+
       count.value =  val;
 
     });

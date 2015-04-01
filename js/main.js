@@ -55,7 +55,7 @@
 
       var val =  (parseInt(count.value) + 1);
 
-      if (isNaN(val)) val = 0;
+      if (val > 10 ) val = 10;
 
       count.value =  val;
 
@@ -70,7 +70,7 @@
       var count = this.parentNode.querySelector(".hotel-form__input--sum");
       var val = (parseInt(count.value) - 1);
 
-      if (val < 0 || isNaN(val)) val = 0;
+      if (val < 0 ) val = 0;
 
       count.value =  val;
 

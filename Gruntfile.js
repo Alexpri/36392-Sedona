@@ -53,6 +53,13 @@ module.exports = function(grunt) {
         }
     },
 
+    csscomb: {
+      style: {
+        expand: true,
+        src: ["less/**/*.less"]
+      }
+    },
+
     less: {
       style: {
         files: {
@@ -117,6 +124,7 @@ module.exports = function(grunt) {
     'sprite',
     'imagemin',
     'svgmin',
+    'csscomb',
     'less',
     'autoprefixer',
     'notify',
