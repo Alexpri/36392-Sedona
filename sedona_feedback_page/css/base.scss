@@ -292,7 +292,7 @@ form{
       background: url(img/ico-checkbox-active.png) no-repeat center;
     }
 
-    input[type="radio"]:checked + label::before {
+    input[type="radio"]:checked ~ label::before {
       background: url(img/ico-radio--active.png) no-repeat center;
     }
 

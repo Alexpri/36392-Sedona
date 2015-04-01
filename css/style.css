@@ -507,6 +507,7 @@ h1 {
   font-size: 16px;
   color: #ffffff;
   background-color: #766357;
+  cursor: pointer;
 }
 .hotel-form {
   margin: 0;
@@ -707,6 +708,9 @@ h1 {
 .hotel-form__btn:active {
   color: #7babc9;
   background-color: #5496bd;
+}
+.form-none {
+  display: none;
 }
 .reason__box {
   width: 100%;
@@ -925,7 +929,7 @@ h1 {
 }
 .reason-features__icon.icon-food {
   background-image: url(../img/min/sprite.png);
-  background-position: -211px -122px;
+  background-position: -77px 0px;
   width: 37px;
   height: 35px;
 }
@@ -933,8 +937,8 @@ h1 {
   .reason-features__icon.icon-food {
     width: 68px;
     height: 75px;
-    background-size: 880%;
-    background-position: -365px -200px;
+    background-size: 330%;
+    background-position: -155px 0px;
   }
 }
 .social {
@@ -1051,7 +1055,7 @@ h1 {
 }
 .footer {
   position: relative;
-  padding-top: 415px;
+  padding-top: 490px;
   font-size: 0;
 }
 .footer__box {
@@ -1163,10 +1167,6 @@ h1 {
   .nav__item:nth-of-type(2) {
     margin-right: 20%;
   }
-  .nav__item--logo {
-    position: static;
-    margin-left: 0;
-  }
 }
 .logo {
   position: absolute;
@@ -1182,10 +1182,10 @@ h1 {
   box-shadow: none;
   background-color: transparent;
 }
-.logo:before {
+.logo::before {
   position: absolute;
   background-image: url(../img/min/sprite.png);
-  background-position: 0px -178px;
+  background-position: 0px 0px;
   width: 67px;
   height: 56px;
   background-repeat: no-repeat;
@@ -1194,24 +1194,20 @@ h1 {
   margin-left: -33px;
   z-index: 10;
 }
-@media and (min-width: 768px) and (min-device-pixel-ratio: 2) {
-  .logo:before {
+@media (-webkit-min-device-pixel-ratio: 2), (min--moz-device-pixel-ratio: 2) {
+  .logo::before {
+    background: url('../img/min/logo-sedona-2x.png') no-repeat 0 0;
     width: 67px;
     height: 56px;
-    background-image: url(../img/min/sprite.png);
-    background-position: -211px 0px;
-    width: 134px;
-    height: 112px;
+    background-size: 100%;
   }
 }
-@media and (min-width: 768px) and (min-device-pixel-ratio: 3) {
-  .logo:before {
+@media (-webkit-min-device-pixel-ratio: 3), (min--moz-device-pixel-ratio: 3) {
+  .logo::before {
+    background: url('../img/min/logo-sedona-3x.png') no-repeat 0 0;
     width: 67px;
     height: 56px;
-    background-image: url(../img/min/sprite.png);
-    background-position: 0px 0px;
-    width: 201px;
-    height: 168px;
+    background-size: 100%;
   }
 }
 .logo::after {

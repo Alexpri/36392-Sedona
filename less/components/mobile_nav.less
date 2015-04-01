@@ -62,11 +62,6 @@
       &:nth-of-type(2) {
         margin-right: @col-5;
       }
-
-      &--logo {
-        position: static;
-        margin-left: 0;
-      }
     }
   }
 }
@@ -84,7 +79,7 @@
   box-shadow: none;
   background-color: transparent;
 
-    &:before {
+    &::before {
       position: absolute;
       .sprite(@logo-sedona-1x);
       background-repeat: no-repeat;
@@ -93,16 +88,20 @@
       margin-left: -33px;
       z-index: 10;
 
-      @media and (min-width: @screen-md) and (min-device-pixel-ratio: 2) {
+      @media (-webkit-min-device-pixel-ratio: 2),
+             (min--moz-device-pixel-ratio: 2) {
+        background: url('../img/min/logo-sedona-2x.png') no-repeat 0 0;
         width: 67px;
         height: 56px;
-        .sprite(@logo-sedona-2x);
+        background-size: 100%;
       }
 
-      @media and (min-width: @screen-md) and (min-device-pixel-ratio: 3) {
+      @media (-webkit-min-device-pixel-ratio: 3),
+             (min--moz-device-pixel-ratio: 3) {
+        background: url('../img/min/logo-sedona-3x.png') no-repeat 0 0;
         width: 67px;
         height: 56px;
-        .sprite(@logo-sedona-3x);
+        background-size: 100%;
       }
     }
 

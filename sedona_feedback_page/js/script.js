@@ -21,7 +21,7 @@
 
       count.value =  val;
 
-    })
+    });
   };
 
   for(var i = 0; i < minus.length; i++) {
@@ -36,7 +36,7 @@
 
       count.value =  val;
 
-    })
+    });
   };
 
 
@@ -47,7 +47,7 @@
 
       if (isNaN(this.value)) this.value = 0;
 
-    })
+    });
 
   };
 
@@ -55,12 +55,15 @@
   //_____Send-form____
 
 
+ /* var elements = document.querySelectorAll(".response input[type=text]");
+  var radio = document.querySelector(".response [name=feedback]:checked");
+  var checkboxes = document.querySelectorAll(".response input[type=checkbox]:checked");
 
-  /*xhr.open("get", "/send?" + qs);*/
 
 
-  var elements = document.querySelectorAll(".response input[type=text]");
   var qs = "";
+
+  //_______Text-input_______
 
   for(var i = 0; i < elements.length; i++) {
     var element = elements[i];
@@ -73,34 +76,61 @@
 
   }
 
-  var xhr = new XMLHttpRequest();
 
 
-  xhr.open("post", "/send");
+  //_______radio-input_______
+  (function () {
 
-  xhr.addEventListener("readystatechange", function() {
-    if (xhr.readyState == 4) {
-    console.log(xhr.responseText);
-    }
+    var name = radio.name;
+    var value = radio.value;
+
+    qs = qs + encodeURIComponent(name) + "=" + encodeURIComponent(value) + "&";
+
+  })();
+
+
+  //_______checkbox-input_______
+
+  for(var i = 0; i < checkboxes.length; i++) {
+    var checkbox = checkboxes[i];
+
+    var name = checkbox.name;
+    var value = checkbox.value;
+
+    qs = qs + encodeURIComponent(name) + "=" + encodeURIComponent(value) + "&";
+
+  }*/
+
+
+  if(!("FormData" in window)) {
+    return;
+  }
+
+  var form = document.querySelector(".response");
+
+
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    var data = new FormData(form);
+
+    request(data, function(response) {
+      console.log(response);
+    });
   });
 
-  xhr.send(qs);
+  function request(data, fn) {
 
+    var xhr = new XMLHttpRequest();
 
+    xhr.open("post", "/send?" + (new Date()).getTime());
+    xhr.addEventListener("readystatechange", function() {
+      if (xhr.readyState == 4) {
+        fn(xhr.responseText);
+      }
+  });
 
+  xhr.send(data);
+
+  }
 
 })();
-
-
-
-/*var xhr = new XMLHttpRequest();
-
-  xhr.open("get", "hello.txt");
-
-  xhr.addEventListener("readystatechange", function() {
-    if (xhr.readyState == 4) {
-    console.log(xhr.responseText);
-    }
-  });
-
-  xhr.send();*/

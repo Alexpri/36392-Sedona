@@ -21,6 +21,25 @@
   });
 
 
+  //____Form-active_____
+
+
+
+  var title = document.querySelector(".hotel-search__title");
+  var form = document.querySelector(".hotel-form");
+
+  title.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    if (form.classList.contains("form-none")) {
+      form.classList.remove("form-none");
+    } else {
+      form.classList.add("form-none");
+    }
+
+  })
+
+
   //____Form-validation____
 
   var plus = document.querySelectorAll(".hotel-form__icon--plus");
