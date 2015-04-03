@@ -8,10 +8,6 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    clean: {
-      build: ['build']
-    },
-
     copy: {
       build: {
         files: [{
@@ -22,7 +18,7 @@ module.exports = function(grunt) {
             'js/**',
             'index.html'
           ],
-          dest: 'build'
+          dest: "build"
         }]
       }
     },
@@ -30,10 +26,10 @@ module.exports = function(grunt) {
 
     sprite:{
       all: {
-        src: 'build/img/app/sprite/*.png',
-        dest: 'build/img/app/sprite.png',
+        src: 'img/app/sprite/*.png',
+        dest: 'img/app/sprite.png',
         imgPath: '../img/min/sprite.png',
-        destCss: 'source/less/helpers/sprite.less',
+        destCss: 'less/helpers/sprite.less',
         algorithm: 'binary-tree',
         padding: 10
       }
@@ -44,17 +40,39 @@ module.exports = function(grunt) {
       images: {
         files: [{
           expand: true,
-          cwd: 'build/img/app',
-          src: ['**/*.{png,jpg,gif,svg}', '!sprite/**/*'],
-          dest: 'build/img/min'
+          cwd: 'img/app',
+          src: ['**/*.{png,jpg,gif}', '!sprite/**/*'],
+          dest: 'img/min'
         }]
       }
+    },
+
+    svgmin: {
+        options: {
+            plugins: [
+                {
+                    removeViewBox: false
+                }, {
+                    removeUselessStrokeAndFill: false
+                }
+            ]
+        },
+        dist: {
+          files: [{
+              expand: true,
+              cwd: 'build/img',
+              src: ['app/svg/*.svg'],
+              dest: 'build/img/min/',
+              ext: '.svg'
+          }]
+        }
     },
 
     csscomb: {
       style: {
         expand: true,
-        src: ['source/less/**/*.less']
+        cwd: "source",
+        src: ['less/**/*.less']
       }
     },
 
@@ -90,7 +108,8 @@ module.exports = function(grunt) {
           report: 'gzip'
         },
         files: {
-          'build/css/style.min.css': ['build/css/style.css']
+          cwd: "build",
+          'css/style.css': ['css/style.css']
         }
       }
     },
@@ -116,7 +135,7 @@ module.exports = function(grunt) {
 
     watch: {
       style: {
-        files: ['source/less/**/*.less'],
+        files: ['less/**/*.less'],
         tasks: ['default'],
         options: {
           spawn: false,
@@ -124,7 +143,7 @@ module.exports = function(grunt) {
         },
       },
       html: {
-        files: ['build/*.html'],
+        files: ['*.html'],
         options: {
           spawn: false,
           livereload: true
@@ -137,15 +156,13 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('default', [
-    'clean',
-    'copy',
     'sprite',
     'imagemin',
+    'svgmin',
     'csscomb',
     'less',
     'cmq',
     'autoprefixer',
-    'cssmin',
     'notify',
     'connect',
     'watch'
