@@ -95,6 +95,26 @@ module.exports = function(grunt) {
       }
     },
 
+    concat: {
+      options: {
+        separator: ';'
+      },
+      style: {
+        src: ['build/js/**/*.js'],
+        dest: 'build/js/min/scripts.js'
+      }
+    },
+
+
+    uglify: {
+      js: {
+        files: {
+          'build/js/min/scripts.js': ['build/js/min/scripts.js']
+        }
+      }
+    },
+
+
     notify: {
       less:{
         options:{
@@ -103,6 +123,7 @@ module.exports = function(grunt) {
         }
       }
     },
+
 
     connect: {
       server: {
@@ -146,6 +167,8 @@ module.exports = function(grunt) {
     'cmq',
     'autoprefixer',
     'cssmin',
+    'concat',
+    'uglify',
     'notify',
     'connect',
     'watch'
