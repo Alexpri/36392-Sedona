@@ -853,14 +853,14 @@ h1 {
 .reason-features__icon.icon-house {
 	width: 37px;
 	height: 37px;
-	background: url('../img/min/app/svg/icon-house.svg') no-repeat 0 0;
+	background: url('../img/min/svg/icon-house.svg') no-repeat 0 0;
 	background-size: 100%;
 }
 
 .reason-features__icon.icon-price {
 	width: 32px;
 	height: 38px;
-	background: url('../img/min/app/svg/icon-gift.svg') no-repeat 0 0;
+	background: url('../img/min/svg/icon-gift.svg') no-repeat 0 0;
 	background-size: 100%;
 }
 
@@ -895,15 +895,15 @@ h1 {
 }
 
 .social__item--tw {
-	background: #81b3d2 url('../img/min/app/svg/icon-twitter.svg') no-repeat 50% 50%;
+	background: #81b3d2 url('../img/min/svg/icon-twitter.svg') no-repeat 50% 50%;
 }
 
 .social__item--fb {
-	background: #81b3d2 url('../img/min/app/svg/icon-facebook.svg') no-repeat 50% 50%;
+	background: #81b3d2 url('../img/min/svg/icon-facebook.svg') no-repeat 50% 50%;
 }
 
 .social__item--youtube {
-	background: #81b3d2 url('../img/min/app/svg/icon-youtube.svg') no-repeat 50% 50%;
+	background: #81b3d2 url('../img/min/svg/icon-youtube.svg') no-repeat 50% 50%;
 }
 
 .design {
@@ -1070,7 +1070,7 @@ h1 {
 	height: 70px;
 	left: 50%;
 	margin-left: -68px;
-	background: url('../img/min/app/svg/form-logo-triangle.svg') no-repeat 50% 0;
+	background: url('../img/min/svg/form-logo-triangle.svg') no-repeat 50% 0;
 }
 
 .active-nav {
@@ -1310,8 +1310,8 @@ h1 {
 .reason-features__icon.icon-food {
 	width: 68px;
 	height: 75px;
-	background-size: 330%;
-	background-position: -155px 0px;
+	background-size: 310%;
+	background-position: -143px 0px;
 }
 
 .social {

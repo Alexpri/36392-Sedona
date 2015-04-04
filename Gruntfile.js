@@ -12,6 +12,7 @@ module.exports = function(grunt) {
       build: ['build']
     },
 
+
     copy: {
       build: {
         files: [{
@@ -51,12 +52,14 @@ module.exports = function(grunt) {
       }
     },
 
+
     csscomb: {
       style: {
         expand: true,
         src: ['source/less/**/*.less']
       }
     },
+
 
     less: {
       style: {
@@ -66,6 +69,7 @@ module.exports = function(grunt) {
       }
     },
 
+
     cmq: {
       style: {
         files: {
@@ -73,6 +77,7 @@ module.exports = function(grunt) {
         }
       }
     },
+
 
     autoprefixer: {
       options: {
@@ -82,6 +87,7 @@ module.exports = function(grunt) {
         src: 'build/css/style.css'
       }
     },
+
 
     cssmin: {
       style: {
@@ -94,6 +100,7 @@ module.exports = function(grunt) {
         }
       }
     },
+
 
     concat: {
       options: {
@@ -138,7 +145,7 @@ module.exports = function(grunt) {
     watch: {
       style: {
         files: ['source/less/**/*.less'],
-        tasks: ['default'],
+      //tasks: ['default'],
         options: {
           spawn: false,
           livereload: true
@@ -154,7 +161,6 @@ module.exports = function(grunt) {
     }
 
   });
-
 
 
   grunt.registerTask('default', [
