@@ -79,12 +79,12 @@
 
   for(var i = 0; i < plus.length; i++) {
 
-    input[i].addEventListener("blur", function (event) {
+    input[i].addEventListener("input", function (event) {
       event.preventDefault();
 
       if (isNaN(this.value)) this.value = 0;
 
-    })
+    });
 
   };
 
