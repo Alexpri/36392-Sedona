@@ -532,11 +532,11 @@ h1 {
 
 .btn--cancel {
 	top: 0;
-	background: url('../img/min/app/svg/icon-cross.svg') no-repeat 50% 50%;
+	background: url('../img/min/svg/icon-cross.svg') no-repeat 50% 50%;
 }
 
 .btn--open {
-	background: url('../img/min/app/svg/icon-menu.svg') no-repeat 50% 50%;
+	background: url('../img/min/svg/icon-menu.svg') no-repeat 50% 50%;
 }
 
 .hotel-search {
