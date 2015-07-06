@@ -53,36 +53,6 @@
     });
   };
 
-
-
-//_______Form-send______
-
-/*  if(!("FormData" in window) || !("FileReader" in window)) {
-    return;
-  }
-
-  var form = document.querySelector(".response");
-  var area = document.querySelector(".photo-area");
-
-  var template = document.querySelector("#image-template").innerHTML;
-  var queue = [];
-
-  form.addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    var data = new FormData(form);
-
-    queue.forEach(function(element) {
-      data.append("images", element.file);
-    });
-
-    request(data, function(response) {
-      console.log(response);
-    });
-  });*/
-
-
-
   /*New*/
 
   (function() {
@@ -176,97 +146,7 @@
       div.parentNode.removeChild(div);
     }
 
-
   })();
-
-
-  /*start*/
-/*
-
-//_____AJAX_____
-
-  function request(data, fn) {
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.open("post", "/send?" + (new Date()).getTime());
-    xhr.addEventListener("readystatechange", function() {
-      if (xhr.readyState == 4) {
-        fn(xhr.responseText);
-      }
-  });
-
-  xhr.send(data);
-
-  }
-
-
-  //_____Upload-picture_____
-
-
-  if(!("FormData" in window)) {
-    form.querySelector(".pictures").addEventListener("change", function() {
-
-      var files = this.files;
-
-      for (var i = 0; i < files.length; i++) {
-        preview(files[i]);
-      }
-
-      this.value = "";
-
-    });
-
-
-    function preview(file) {
-
-        var reader = new FileReader();
-
-        reader.addEventListener("load", function (event) {
-          var html = Mustache.render(template, {
-            "image": event.target.rasult,
-            "name": file.name
-          });
-
-          var div = document.createElement("div");
-          div.classList.add("photo");
-          div.innerHTML = html;
-
-          area.appendChild(div);
-
-          div.querySelector(".delete-photo").addEventListener("click", function(event) {
-            event.preventDefault();
-            removePreview(div);
-
-          });
-
-          queue.push({
-            "file": file,
-            "div": div
-          });
-
-        });
-
-      reader.readAsDataURL(file);
-    }
-  }
-
-  function removePreview(div) {
-    queue = queue.filter(function(element) {
-      return element.div != div;
-    });
-
-    div.parentNode.removeChild(div);
-  }
-
-})();
-
-
-*/
-
-/*END*/
-
-
 
   //_____Send-form____
 
