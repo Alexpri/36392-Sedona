@@ -1,14 +1,9 @@
 (function() {
-
-  //_____Form-validation____
-
-
-
   //_____Validation-count____
 
-  var plus = document.querySelectorAll(".plus");
-  var minus = document.querySelectorAll(".minus");
-  var input = document.querySelectorAll(".counter-input");
+  var plus = document.querySelectorAll(".plus"),
+      minus = document.querySelectorAll(".minus"),
+      input = document.querySelectorAll(".counter-input");
 
   for(var i = 0; i < plus.length; i++) {
 
@@ -22,7 +17,6 @@
       if (val > 10 ) val = 10;
 
       count.value =  val;
-
     });
   };
 
@@ -31,19 +25,12 @@
     minus[i].addEventListener("click", function (event) {
       event.preventDefault();
 
-      var childr = this.parentNode.querySelector(".children-count");
-      var people = this.parentNode.querySelector(".people-count");
-      console.log(people);
+      var count = this.parentNode.querySelector(".counter-input");
+      var val = (parseInt(count.value) - 1);
 
-      var val = (parseInt(childr.value) - 1);
-      var valp = (parseInt(people.value) - 1);
+      if (val < 0 ) val = 0;
 
-     /* if (val < 0 ) val = 0;
-      if (valp < 0 ) valp = 1;*/
-
-      childr.value =  val;
-      people.value =  valp;
-
+      count.value =  val;
     });
   };
 
@@ -53,17 +40,24 @@
     input[i].addEventListener("input", function (event) {
       event.preventDefault();
 
-      if (isNaN(this.value)) this.value = 0;
+      var val = this.value;
+
+      if (isNaN(val)) {
+        this.value = 0;
+      } else if (val > 10) {
+        this.value = 10;
+      } else if (val < 0) {
+        this.value = 0;
+      }
 
     });
-
   };
 
 
 
 //_______Form-send______
 
-  if(!("FormData" in window) || !("FileReader" in window)) {
+/*  if(!("FormData" in window) || !("FileReader" in window)) {
     return;
   }
 
@@ -85,8 +79,109 @@
     request(data, function(response) {
       console.log(response);
     });
-  });
+  });*/
 
+
+
+  /*New*/
+
+  (function() {
+
+    if(!("FormData" in window)|| !("FileReader" in window)) {
+      return;
+    }
+
+    /*AJAX*/
+
+    var form = document.querySelector(".response"),
+        area = document.querySelector('.photo-area'),
+        template = document.querySelector("#image-template").innerHTML,
+        queue = [];
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      var data = new FormData(form);
+
+      request(data, function(response) {
+        console.log(response);
+      });
+    });
+
+    function request(data, func) {
+      var xhr = new XMLHttpRequest();
+
+      xhr.open("post", "/send?" + (new Date()).getTime());
+
+      xhr.addEventListener("readystatechange", function() {
+        if (xhr.readyState == 4) {
+          func(xhr.responseText);
+        }
+      });
+
+      xhr.send(data);
+    }
+
+
+    form.querySelector(".pictures").addEventListener("change", function() {
+      var files = this.files;
+
+      for (var i = 0; i < files.length; i++) {
+        preview(files[i]);
+      };
+
+      this.value = "";
+    });
+
+    function preview(file) {
+      if (file.type.match(/image.*/)) {
+        var reader = new FileReader();
+
+        reader.addEventListener("load", function(event) {
+          var html = Mustache.render(template, {
+            "image": event.target.result,
+            "name": file.name
+          });
+
+          var div = document.createElement("div");
+          div.classList.add("photo");
+          div.innerHTML = html;
+
+          area.appendChild(div);
+
+          div.querySelector(".delete-photo").addEventListener("click", function(event) {
+            event.preventDefault();
+
+            console.log(1);
+
+            removePreview(div);
+          })
+
+          queue.push({
+            "file": file,
+            "div": div
+          });
+
+        });
+
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function removePreview(div) {
+      queue = queue.filter(function(element) {
+        return element.div != div;
+      })
+
+      div.parentNode.removeChild(div);
+    }
+
+
+  })();
+
+
+  /*start*/
+/*
 
 //_____AJAX_____
 
@@ -148,7 +243,6 @@
           queue.push({
             "file": file,
             "div": div
-
           });
 
         });
@@ -166,6 +260,11 @@
   }
 
 })();
+
+
+*/
+
+/*END*/
 
 
 
@@ -217,3 +316,5 @@
     qs = qs + encodeURIComponent(name) + "=" + encodeURIComponent(value) + "&";
 
   }*/
+
+})();
