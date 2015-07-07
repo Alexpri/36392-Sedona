@@ -1,57 +1,100 @@
 (function() {
   //_____Validation-count____
 
-  var plus = document.querySelectorAll(".plus"),
-      minus = document.querySelectorAll(".minus"),
-      input = document.querySelectorAll(".counter-input");
+  (function() {
 
-  for(var i = 0; i < plus.length; i++) {
+    var plus = document.querySelectorAll(".plus"),
+        minus = document.querySelectorAll(".minus"),
+        input = document.querySelectorAll(".counter-input"),
+        trevelers = document.querySelector(".travelers"),
+        templateAdult = document.querySelector("#adult-template").innerHTML,
+        templatechild = document.querySelector("#child-template").innerHTML;
 
-    plus[i].addEventListener("click", function (event) {
-      event.preventDefault();
+    var temp = function(count) {
+          var div = document.createElement("div");
+          div.classList.add("row", "temp");
 
-      var count = this.parentNode.querySelector(".counter-input");
+          if (count.classList.contains("people-count")) {
+            div.classList.add("adult");
+            div.innerHTML = templateAdult;
+          } else if (count.classList.contains("children-count")) {
+            div.classList.add("child");
+            div.innerHTML = templatechild;
+          }
 
-      var val =  (parseInt(count.value) + 1);
+          trevelers.appendChild(div);
+        }
 
-      if (val > 10 ) val = 10;
+    var tempDel = function(count) {
+        var tempAdult = document.querySelector(".adult:last-child"),
+            tempChild = document.querySelector(".child:last-child");
 
-      count.value =  val;
-    });
-  };
+          if (count.classList.contains("people-count")) {
+            if (tempAdult) tempAdult.parentNode.removeChild(tempAdult);
+          } else if (count.classList.contains("children-count")) {
+            if (tempChild) tempChild.parentNode.removeChild(tempChild);
+          }
+        }
 
-  for(var i = 0; i < minus.length; i++) {
+    var tempInput = function(count) {
 
-    minus[i].addEventListener("click", function (event) {
-      event.preventDefault();
+        }
 
-      var count = this.parentNode.querySelector(".counter-input");
-      var val = (parseInt(count.value) - 1);
+    for(var i = 0; i < plus.length; i++) {
 
-      if (val < 0 ) val = 0;
+      plus[i].addEventListener("click", function (event) {
+        event.preventDefault();
 
-      count.value =  val;
-    });
-  };
+        var count = this.parentNode.querySelector(".counter-input");
+
+        var val =  (parseInt(count.value) + 1);
+
+        if (val > 10 ) val = 10;
+
+        count.value =  val;
+
+        temp(count);
+      });
+    };
+
+    for(var i = 0; i < minus.length; i++) {
+
+      minus[i].addEventListener("click", function (event) {
+        event.preventDefault();
+
+        var count = this.parentNode.querySelector(".counter-input");
+        var val = (parseInt(count.value) - 1);
+
+        if (val < 0 ) val = 0;
+
+        count.value =  val;
+
+        tempDel(count);
+      });
+    };
 
 
-  for(var i = 0; i < plus.length; i++) {
+    for(var i = 0; i < plus.length; i++) {
 
-    input[i].addEventListener("input", function (event) {
-      event.preventDefault();
+      input[i].addEventListener("input", function (event) {
+        event.preventDefault();
 
-      var val = this.value;
+        var val = this.value;
 
-      if (isNaN(val)) {
-        this.value = 0;
-      } else if (val > 10) {
-        this.value = 10;
-      } else if (val < 0) {
-        this.value = 0;
-      }
+        if (isNaN(val)) {
+          this.value = 0;
+        } else if (val > 10) {
+          this.value = 10;
+        } else if (val < 0) {
+          this.value = 0;
+        }
 
-    });
-  };
+        tempInput(val);
+
+      });
+    };
+
+  })();
 
   /*New*/
 
@@ -121,8 +164,6 @@
 
           div.querySelector(".delete-photo").addEventListener("click", function(event) {
             event.preventDefault();
-
-            console.log(1);
 
             removePreview(div);
           })
