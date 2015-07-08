@@ -248,7 +248,8 @@ form {
 form input[type='text'],
 form textarea,
 form select,
-form input[type='password'] {
+form input[type='password'],
+form input[type='number'] {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -258,25 +259,26 @@ form input[type='password'] {
   font-weight: 800;
   font-size: 18px;
   line-height: 20px;
-  padding: 18px 22px;
+  padding: 19px 22px;
   color: black;
   text-transform: none;
   width: 100%;
   -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
-  border: 1px solid #f2f2f2;
 }
 form input[type='text']:focus,
 form textarea:focus,
 form select:focus,
-form input[type='password']:focus {
+form input[type='password']:focus,
+form input[type='number']:focus {
   background: #e5e5e5;
 }
 form input[type='text'].error,
 form textarea.error,
 form select.error,
-form input[type='password'].error {
+form input[type='password'].error,
+form input[type='number'].error {
   border: 1px solid red;
 }
 form label {
@@ -519,18 +521,32 @@ body {
   background-position: center;
 }
 
-.counter-input {
-  width: 160px !important;
+.counter-input-inner {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   position: relative;
+  width: 155px;
+  display: inline-block;
+  vertical-align: top;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 20px;
+  overflow: hidden;
 }
+
 .counter-input:after {
   content: "дн.";
   font-size: 18px;
   line-height: 26px;
   color: rgba(0, 0, 0, 0.3);
-  position: absolute;
   top: 17px;
   right: 20px;
+}
+
+input[type="number"].counter-input {
+  width: 200px;
 }
 
 /*step*/

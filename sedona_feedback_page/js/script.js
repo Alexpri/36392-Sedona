@@ -1,193 +1,226 @@
 (function() {
   //_____Validation-count____
 
-  (function() {
+  var func = {
 
-    var plus = document.querySelectorAll(".plus"),
-        minus = document.querySelectorAll(".minus"),
-        input = document.querySelectorAll(".counter-input"),
-        trevelers = document.querySelector(".travelers"),
-        templateAdult = document.querySelector("#adult-template").innerHTML,
-        templatechild = document.querySelector("#child-template").innerHTML;
+   /* init: function(){
+          func.validation();
+          func.pic();
+      }(),*/
 
-    var temp = function(count) {
-          var div = document.createElement("div");
-          div.classList.add("row", "temp");
+    validation: function() {
 
-          if (count.classList.contains("people-count")) {
-            div.classList.add("adult");
-            div.innerHTML = templateAdult;
-          } else if (count.classList.contains("children-count")) {
-            div.classList.add("child");
-            div.innerHTML = templatechild;
-          }
+      var plus = document.querySelectorAll(".plus"),
+          minus = document.querySelectorAll(".minus"),
+          input = document.querySelectorAll(".counter-input"),
+          travelers = document.querySelector(".travelers"),
+          templateAdult = document.querySelector("#adult-template").innerHTML,
+          templatechild = document.querySelector("#child-template").innerHTML;
 
-          trevelers.appendChild(div);
-        }
+      var tempAdd = function(count) {
+            var div = document.createElement("div");
 
-    var tempDel = function(count) {
-        var tempAdult = document.querySelector(".adult:last-child"),
-            tempChild = document.querySelector(".child:last-child");
+            div.classList.add("row", "temp");
 
-          if (count.classList.contains("people-count")) {
-            if (tempAdult) tempAdult.parentNode.removeChild(tempAdult);
-          } else if (count.classList.contains("children-count")) {
-            if (tempChild) tempChild.parentNode.removeChild(tempChild);
-          }
-        }
+            if (count.classList.contains("people-count")) {
+              div.classList.add("adult");
+              div.innerHTML = templateAdult;
+            } else if (count.classList.contains("children-count")) {
+              div.classList.add("child");
+              div.innerHTML = templatechild;
+            }
 
-    var tempInput = function(count) {
+            travelers.appendChild(div);
+          };
 
-        }
+      var tempDel = {
+            itemOne: function(count) {
+              var tempAdult = document.querySelector(".travelers .adult:last-of-type"),
+                  tempChild = document.querySelector(".travelers .child:last-of-type");
 
-    for(var i = 0; i < plus.length; i++) {
+                if (count.classList.contains("people-count")) {
+                  if (tempAdult) tempAdult.parentNode.removeChild(tempAdult);
+                } else if (count.classList.contains("children-count")) {
+                  if (tempChild) tempChild.parentNode.removeChild(tempChild);
+                }
+              },
+            items: function(count) {
+              var tempAdult = document.querySelector(".travelers .adult:last-of-type"),
+                  tempChild = document.querySelector(".travelers .child:last-of-type");
 
-      plus[i].addEventListener("click", function (event) {
-        event.preventDefault();
+                if (count.classList.contains("people-count")) {
+                  while (tempAdult) {
+                    tempAdult.parentNode.removeChild(tempAdult);
+                    tempAdult = document.querySelector(".travelers .adult:last-of-type");
+                  }
+                } else if (count.classList.contains("children-count")) {
+                  while (tempChild) {
+                    tempChild.parentNode.removeChild(tempChild);
+                    tempChild = document.querySelector(".travelers .child:last-of-type");
+                  }
+                }
+              }
+          };
 
-        var count = this.parentNode.querySelector(".counter-input");
+      var tempInput = function(count, val) {
+            tempDel.items(count);
 
-        var val =  (parseInt(count.value) + 1);
+            for (var i = 0; i < val; i++) {
+              tempAdd(count);
+            };
+          };
 
-        if (val > 10 ) val = 10;
+      for(var i = 0; i < plus.length; i++) {
 
-        count.value =  val;
+        plus[i].addEventListener("click", function (event) {
+          event.preventDefault();
 
-        temp(count);
-      });
-    };
+          var count = this.parentNode.querySelector(".counter-input"),
+              val =  (parseInt(count.value) + 1);
 
-    for(var i = 0; i < minus.length; i++) {
+          if (val > 10 ) val = 10;
+          count.value =  val;
 
-      minus[i].addEventListener("click", function (event) {
-        event.preventDefault();
-
-        var count = this.parentNode.querySelector(".counter-input");
-        var val = (parseInt(count.value) - 1);
-
-        if (val < 0 ) val = 0;
-
-        count.value =  val;
-
-        tempDel(count);
-      });
-    };
-
-
-    for(var i = 0; i < plus.length; i++) {
-
-      input[i].addEventListener("input", function (event) {
-        event.preventDefault();
-
-        var val = this.value;
-
-        if (isNaN(val)) {
-          this.value = 0;
-        } else if (val > 10) {
-          this.value = 10;
-        } else if (val < 0) {
-          this.value = 0;
-        }
-
-        tempInput(val);
-
-      });
-    };
-
-  })();
-
-  /*New*/
-
-  (function() {
-
-    if(!("FormData" in window)|| !("FileReader" in window)) {
-      return;
-    }
-
-    /*AJAX*/
-
-    var form = document.querySelector(".response"),
-        area = document.querySelector('.photo-area'),
-        template = document.querySelector("#image-template").innerHTML,
-        queue = [];
-
-    form.addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      var data = new FormData(form);
-
-      request(data, function(response) {
-        console.log(response);
-      });
-    });
-
-    function request(data, func) {
-      var xhr = new XMLHttpRequest();
-
-      xhr.open("post", "/send?" + (new Date()).getTime());
-
-      xhr.addEventListener("readystatechange", function() {
-        if (xhr.readyState == 4) {
-          func(xhr.responseText);
-        }
-      });
-
-      xhr.send(data);
-    }
-
-
-    form.querySelector(".pictures").addEventListener("change", function() {
-      var files = this.files;
-
-      for (var i = 0; i < files.length; i++) {
-        preview(files[i]);
+          tempAdd(count);
+        });
       };
 
-      this.value = "";
-    });
+      for(var i = 0; i < minus.length; i++) {
 
-    function preview(file) {
-      if (file.type.match(/image.*/)) {
-        var reader = new FileReader();
+        minus[i].addEventListener("click", function (event) {
+          event.preventDefault();
 
-        reader.addEventListener("load", function(event) {
-          var html = Mustache.render(template, {
-            "image": event.target.result,
-            "name": file.name
-          });
+          var count = this.parentNode.querySelector(".counter-input"),
+              val = (parseInt(count.value) - 1);
 
-          var div = document.createElement("div");
-          div.classList.add("photo");
-          div.innerHTML = html;
+          if (val < 0 ) val = 0;
+          count.value =  val;
 
-          area.appendChild(div);
+          tempDel.itemOne(count);
+        });
+      };
 
-          div.querySelector(".delete-photo").addEventListener("click", function(event) {
-            event.preventDefault();
+      for(var i = 0; i < input.length; i++) {
 
-            removePreview(div);
-          })
+        input[i].addEventListener("input", function (event) {
+          event.preventDefault();
 
-          queue.push({
-            "file": file,
-            "div": div
-          });
+          var count = this.parentNode.querySelector(".counter-input"),
+              val = parseInt(this.value);
 
+              console.log(val);
+
+          if (isNaN(val)) {
+            this.value = 0;
+          } else if (val > 10) {
+            this.value = 10;
+          } else if (val < 0) {
+            this.value = 0;
+          }
+
+          val = this.value;
+
+          tempInput(count, val);
+        });
+      };
+    }()
+  };
+
+
+
+  /*New*/
+  var pict = {
+
+    pictureUpload: function() {
+
+      if(!("FormData" in window)|| !("FileReader" in window)) {
+        return;
+      }
+
+      /*AJAX*/
+
+      var form = document.querySelector(".response"),
+          area = document.querySelector('.photo-area'),
+          template = document.querySelector("#image-template").innerHTML,
+          queue = [];
+
+      form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        var data = new FormData(form);
+
+        request(data, function(response) {
+          console.log(response);
+        });
+      });
+
+      function request(data, func) {
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("post", "/send?" + (new Date()).getTime());
+
+        xhr.addEventListener("readystatechange", function() {
+          if (xhr.readyState == 4) {
+            func(xhr.responseText);
+          }
         });
 
-        reader.readAsDataURL(file);
+        xhr.send(data);
       }
-    }
 
-    function removePreview(div) {
-      queue = queue.filter(function(element) {
-        return element.div != div;
-      })
 
-      div.parentNode.removeChild(div);
-    }
+      form.querySelector(".pictures").addEventListener("change", function() {
+        var files = this.files;
 
-  })();
+        for (var i = 0; i < files.length; i++) {
+          preview(files[i]);
+        };
+
+        this.value = "";
+      });
+
+      function preview(file) {
+        if (file.type.match(/image.*/)) {
+          var reader = new FileReader();
+
+          reader.addEventListener("load", function(event) {
+            var html = Mustache.render(template, {
+              "image": event.target.result,
+              "name": file.name
+            });
+
+            var div = document.createElement("div");
+            div.classList.add("photo");
+            div.innerHTML = html;
+
+            area.appendChild(div);
+
+            div.querySelector(".delete-photo").addEventListener("click", function(event) {
+              event.preventDefault();
+
+              removePreview(div);
+            })
+
+            queue.push({
+              "file": file,
+              "div": div
+            });
+
+          });
+
+          reader.readAsDataURL(file);
+        }
+      }
+
+      function removePreview(div) {
+        queue = queue.filter(function(element) {
+          return element.div != div;
+        })
+
+        div.parentNode.removeChild(div);
+      }
+    }(),
+  };
 
   //_____Send-form____
 

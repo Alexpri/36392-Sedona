@@ -64,7 +64,9 @@
 
               <div class="counter clearfix">
                 <button class="counter-action minus">минус</button>
-                <input type="text" name="travel-time" class="travel-time counter-input" value="0">
+                <div class="counter-input-inner">
+                  <input type="number" min="1" max="10" name="travel-time" class="travel-time counter-input" value="0">
+                </div>
                 <button class="counter-action plus">плюс</button>
               </div>
 
@@ -81,7 +83,7 @@
 
         </div>
 
-        <div class="step step2 same-row travelers">
+        <div class="step step2 same-row">
 
           <h2>Количество путешественников</h2>
 
@@ -90,7 +92,9 @@
               <label for="text7">Количество взрослых: <span>*</span></label>
               <div class="counter clearfix">
                 <button class="counter-action minus">минус</button>
-                <input type="text" name="people-count" class="people-count counter-input" value="1">
+                <div class="counter-input-inner">
+                  <input type="number" min="1" max="10" name="people-count" class="people-count counter-input" value="1">
+                </div>
                 <button class="counter-action plus">плюс</button>
               </div>
             </div>
@@ -98,7 +102,9 @@
               <label for="text8">Количество детей: <span>*</span></label>
               <div class="counter clearfix">
                 <button class="counter-action minus">минус</button>
-                <input type="text" name="children-count" class="children-count counter-input" value="0">
+                <div class="counter-input-inner">
+                  <input type="number" min="1" max="10" name="children-count" class="children-count counter-input" value="0">
+                </div>
                 <button class="counter-action plus">плюс</button>
               </div>
             </div>
@@ -150,6 +156,7 @@
               <input type="text" id="text16">
             </div>
           </div> -->
+          <div class="travelers"></div>
 
         </div>
 
